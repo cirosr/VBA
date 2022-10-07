@@ -1,0 +1,147 @@
+VBA for extracting Outlook email contents
+Disclaimer on lack of DRYness:
+  put together in respose to urgent use-case on initial Covid-19 pandemic days; 
+  receiving responses from various stakeholders via email;
+  needed parsing and grouping for more than 20k emails quickly.
+
+Use case:
+- Parse email contents from different folders within same mailbox 
+- Record results in .xlsx file;
+
+Instruction of use:
+  1. Create a new .xlsm file, in a machine where you have setup your Outlook (app), in Excel app select "Create Macro";
+  2. Copy code below, replacing with your own email account described below as [ COVID19@YourCompany.com ];
+  3. Replace folder names (if your [ Inbox ] has a different name, change that too) or select only [ Inbox ] from code below;
+  4. Run the macro.
+  
+VBA Source Code:
+
+Sub GetFromOutlook()
+
+Dim OutlookApp As Outlook.Application
+Dim OutlookNamespace As Namespace
+Dim Folder As MAPIFolder
+Dim OutlookMail As Variant
+Dim i As Integer
+
+Set OutlookApp = New Outlook.Application
+Set OutlookNamespace = OutlookApp.GetNamespace("MAPI")
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox")
+
+i = 1
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("Ambiguous response - advice required")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+    Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("Temporarily CLOSED")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+    Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("Generic responses")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+    Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("International Company")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+    Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("Key Workers")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+    Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("NO Key Workers")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+
+    Next OutlookMail
+
+Set Folder = OutlookNamespace.Folders("COVID19@YourCompany.com").Folders("Inbox").Folders("RE-SEND REQ/ Contact Update")
+
+For Each OutlookMail In Folder.Items
+    If OutlookMail.ReceivedTime >= 43919 Then
+        Range("eMail_subject").Offset(i, 0).Value = OutlookMail.Subject
+        Range("eMail_date").Offset(i, 0).Value = OutlookMail.ReceivedTime
+        Range("eMail_sender").Offset(i, 0).Value = OutlookMail.SenderEmailAddress
+        Range("eMail_text").Offset(i, 0).Value = OutlookMail.Body
+        Range("eMail_SubFolder").Offset(i, 0).Value = Folder.Name
+        i = i + 1
+    End If
+    
+    Next OutlookMail
+
+Set Folder = Nothing
+Set OutlookNamespace = Nothing
+Set OutlookApp = Nothing
+
+End Sub
