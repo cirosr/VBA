@@ -8,11 +8,13 @@ Use case:
 - Parse email contents from different folders within same mailbox 
 - Record results in .xlsx file;
 
-Instruction of use:
-  1. Create a new .xlsm file, in a machine where you have setup your Outlook (app), in Excel app select "Create Macro";
-  2. Copy code below, replacing with your own email account described below as [ COVID19@YourCompany.com ];
-  3. Replace folder names (if your [ Inbox ] has a different name, change that too) or select only [ Inbox ] from code below;
-  4. Run the macro.
+Instruction of use (for Excel 2016):
+  1. Create a new .xlsm file, in a machine where you have setup your Outlook (app);
+  2. Designate your header according to Range.Names given in source code below (if in doubt, watch this: https://www.microsoft.com/en-us/videoplayer/embed/RWfod8 ) 
+  3. in Excel app select "Create Macro";
+  4. Copy code below, replacing with your own email account described below as [ COVID19@YourCompany.com ];
+  5. Replace folder names (if your [ Inbox ] has a different name, change that too) or select only [ Inbox ] from code below;
+  6. Run the macro.
   
 VBA Source Code:
 
